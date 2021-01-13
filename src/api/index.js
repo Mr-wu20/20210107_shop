@@ -1,24 +1,31 @@
 
 // 引入用axios封装的ajax文件
 import ajax from './ajax'
-
+const BASE_URL = '/api'
 // 1、根据经纬度获取位置详情
-export const reqAddRess = geohash => ajax(`/position/${{geohash}}`)
+export const reqAddress = (geohash) => ajax(`${BASE_URL}/position/${geohash}`)
 // 2、获取食品分类列表
-export const reqAddFoodTypes = () => ajax(`/index_category`)
+export const reqFoodTypes = () => ajax(BASE_URL + `/index_category`)
 // 3、根据经纬度获取商铺列表
-export const reqAddShops = (longitude, latitude) => ajax(`/shops`, {longitude, latitude})
+export const reqShops = (longitude, latitude) => ajax(BASE_URL + '/shops', {longitude, latitude})
 // 4、根据经纬度和关键字搜索商铺列表
-export const reqAddSearchShop = (geohash, keyword) => ajax(`/search_shops`, {geohash, keyword})
+export const reqSearchShop = (geohash, keyword) => ajax(BASE_URL + `/search_shops`, {geohash, keyword})
 // 5、获取一次性验证码
-export const reqAddCaptcha = (captcha) => ajax(`/captcha`, {captcha})
+export const reqCaptcha = (captcha) => ajax(BASE_URL + `/captcha`, {captcha})
 // 6、用户名密码登陆
-export const reqAddLongin = (name, pwd, captcha) => ajax(`/login_pwd`, {name, pwd, captcha}, 'POST')
+export const reqPwdLogin = ({name, pwd, captcha}) => ajax(BASE_URL + `/login_pwd`, {name, pwd, captcha}, 'POST')
 // 7、发送短信验证码
-export const reqAddSendCode = (phone) => ajax(`/sendcode`, {phone})
+export const reqSendCode = (phone) => ajax(BASE_URL + `/sendcode`, {phone})
 // 8、手机号验证码登陆
-export const reqAddPhoneCode = (phone, code) => ajax(`/login_sms`, {phone, code}, 'POST')
+export const reqSmsLogin = ({phone, code}) => ajax(BASE_URL + `/login_sms`, {phone, code}, 'POST')
 // 9、根据会话获取用户信息
-export const reqAddUserInfo = () => ajax(`/userinfo`)
+export const reqUserInfo = () => ajax(BASE_URL + `/userinfo`)
 // 10、用户登出
-export const reqAddLogOut = () => ajax(`/logout`)
+export const reqLogOut = () => ajax(BASE_URL + `/logout`)
+
+// 获取商家信息
+export const reqShopInfo = () => ajax('/info')
+// 获取商家评价数组
+export const reqShopReading = () => ajax('/reading')
+// 获取商家商品数组
+export const reqShopGoods = () => ajax('/goods')
